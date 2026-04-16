@@ -85,6 +85,7 @@ function playRound(humanChoice, computerChoice){
 
 }
 
+/*
 function playGame(){
     humanScore = 0 ;
     computerScore = 0;
@@ -95,6 +96,7 @@ function playGame(){
 
 
     }
+
 
     if (humanScore < computerScore){
         return "human score : " + humanScore + " vs computer score " + computerScore +  "| You lose !"
@@ -107,8 +109,11 @@ function playGame(){
     }
 
 }
+    */
 
-console.log(playGame())
+
+
+
 
 /*
 const humanSelection = getHumanChoice();
@@ -116,3 +121,57 @@ const computerSelection = getComputerChoice();
 
 console.log(humanSelection, computerSelection, playRound(humanSelection, computerSelection));
 */
+
+const rockBtn = document.querySelector("#rockId")
+const paperBtn = document.querySelector("#paperId");
+const scissorsBtn = document.querySelector("#scissId");
+const displayResult = document.createElement("div");
+
+
+function displayInDiv(obj){
+    const result = playRound(obj, getComputerChoice());
+    displayResult.textContent = result;
+}
+
+function playGame(e){
+    //humanScore = 0 ;
+    //computerScore = 0;
+
+    //displayResult.textContent = result;
+
+    if (humanScore === 5  || computerScore === 5){
+        return;
+
+    }
+
+    const result = playRound(e, getComputerChoice());
+
+
+
+
+    if ((humanScore === 5) && computerScore < 5 ){
+        displayResult.textContent = result + "human score "+ humanScore + " vs computer score " + computerScore + "Congratulations, you win !";
+
+    }
+    else if ((computerScore===5) && (humanScore < 5)){
+        displayResult.textContent = result + "human score "+ humanScore + " vs computer score " + computerScore + "You lose !";
+    }
+    else{
+        displayResult.textContent = result + " current human score :  " + humanScore + " vs current computer score : "
+        + computerScore;
+    }
+
+
+}
+
+
+
+
+rockBtn.addEventListener("click", ()=> playGame("rock")
+);
+paperBtn.addEventListener("click", ()=> playGame("paper"));
+scissorsBtn.addEventListener("click", ()=> playGame("scissors"));
+
+
+
+document.body.appendChild(displayResult);
